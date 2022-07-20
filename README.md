@@ -37,7 +37,7 @@ docker build --tag node .
 
 We use the Docker Compose to start the local cluster. Open a new terminal in the project folder and start the cluster with Docker Compose as follows.
 ```bash
-docker-compose up ; docker-compose rm
+docker-compose up ; docker-compose rm -f
 ```
 Each time when the cluster is shut done you need to stop all containers with 'docker-compose rm'.
 

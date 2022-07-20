@@ -12,7 +12,7 @@ ENV HADOOP_VERSION=3
 
 ENV KAFKA_BASE_URL=https://archive.apache.org/dist/kafka
 ENV KAFKA_VERSION=3.2.0
-ENV SCALA_VERSION=2.13
+ENV SCALA_VERSION=2.12
 
 # Install dependencies
 RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss libc6-compat coreutils procps \
@@ -48,5 +48,6 @@ COPY kafka/zookeeper.cfg.dynamic /kafka/config/
 COPY kafka/zk-config.sh /kafka/bin/
 COPY kafka/kafka.sh /
 RUN chmod +x /kafka/bin/zk-config.sh
+RUN echo ok
 
 RUN chmod +x *.sh
