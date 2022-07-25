@@ -1,0 +1,30 @@
+sources = ${SOURCE_LIST}
+streams = ${STREAM_LIST}
+
+buildImage:
+	docker build --tag node .
+
+startCluster: buildImage
+	docker-compose up ; docker-compose rm -f
+
+deleteCluster:
+	docker-compose rm -f
+
+loginMain:
+	docker run -it --rm --name node-main --hostname node-main node:latest /bin/bash
+
+initKafkaTopics:
+	for t in \$(streams) ; \\
+	do \\
+		docker exec -it \$(shell echo \$(sources) | cut -d " " -f1) ${KAFKA_HOME}/bin/kafka-topics.sh --if-not-exists --create --topic \$\$t --bootstrap-server localhost:${KAFKA_BOOTSTRAP_SERVERS_PORT} ; \\
+	done
+
+startDebugConsumer:
+	docker exec -it \$(shell echo \$(sources) | cut -d " " -f1) ${KAFKA_HOME}/bin/kafka-console-consumer.sh --topic \$(shell echo \$(streams) | cut -d " " -f1) --from-beginning --bootstrap-server localhost:${KAFKA_BOOTSTRAP_SERVERS_PORT}
+
+startDebugProducer:
+	docker exec -it \$(shell echo \$(sources) | cut -d " " -f1) ${KAFKA_HOME}/bin/kafka-console-producer.sh --topic \$(shell echo \$(streams) | cut -d " " -f1) --bootstrap-server localhost:${KAFKA_BOOTSTRAP_SERVERS_PORT}
+
+rmImage:
+	docker rmi node
+

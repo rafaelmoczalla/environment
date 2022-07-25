@@ -1,0 +1,41 @@
+#!/bin/bash
+
+SOURCES="${SOURCE_LIST}"
+
+/wait-for-step.sh
+/execute-step.sh
+
+# Configure & start zookeeper
+COUNTER=1
+true > ${KAFKA_HOME}/config/zookeeper.cfg.dynamic
+for s in \$SOURCES ; \\
+do \\
+  echo "server.\$COUNTER=source-\$COUNTER:31200:31201:participant;31202" >> ${KAFKA_HOME}/config/zookeeper.cfg.dynamic ; \\
+  ((COUNTER++)) ; \\
+done
+echo "" >> ${KAFKA_HOME}/config/zookeeper.cfg.dynamic
+
+${KAFKA_HOME}/bin/zk-config.sh
+MYID=\$?
+${KAFKA_HOME}/bin/zookeeper-server-start.sh ${KAFKA_HOME}/config/zookeeper.properties &
+sleep 10s
+
+# Start kafka
+CONNECT=""
+for s in \$SOURCES ; \\
+do \\
+  CONNECT="\$CONNECT,\$s:${ZOOKEEPER_CLIENT_PORT}" ; \\
+done
+CONNECT=\${CONNECT:1}
+
+${KAFKA_HOME}/bin/kafka-server-start.sh ${KAFKA_HOME}/config/server.properties \\
+  --override -Djava.net.preferIPv4Stack=true \\
+  --override delete.topic.enable=true \\
+  --override advertised.host.name=\$HOSTNAME \\
+  --override advertised.port=${KAFKA_BOOTSTRAP_SERVERS_PORT} \\
+  --override zookeeper.connect=\$CONNECT${KAFKA_HOME} \\
+  --override broker.id=\$MYID
+cd /
+
+/finish-step.sh
+

@@ -1,0 +1,10 @@
+dataDir=/tmp/zookeeper
+clientPort=${ZOOKEEPER_CLIENT_PORT}
+maxClientCnxns=${ZOOKEEPER_MAX_CLIENT_CNXNS}
+admin.enableServer=false
+standaloneEnabled=false
+syncLimit=${ZOOKEEPER_SYNC_LIMIT}
+initLimit=${ZOOKEEPER_INIT_LIMIT}
+tickTime=${ZOOKEEPER_TICK_TIME}
+dynamicConfigFile=${KAFKA_HOME}/config/zookeeper.cfg.dynamic
+
