@@ -243,3 +243,8 @@ When you want to add a spark worker just add it in the `docker-compose.yml` file
       - "SPARK_WORKER_LOG=/spark/logs"
       - "SPARK_MASTER=spark://node-main:7077"
 ```
+
+## To-Do List
+- [ ] Add utilities for measuring network, CPU & memory utilization.
+- [ ] Add an example for tree like network topologies.
+- [ ] Add utilities restricting network bandwidth.
