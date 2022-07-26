@@ -5,7 +5,7 @@ Author: [Rafael Moczalla](Rafael.Moczalla@hpi.de)
 
 Create Date: 17 July 2022
 
-Last Update: 25 July 2022
+Last Update: 26 July 2022
 
 Tested on Ubuntu 22.04 LTS.
 
@@ -25,8 +25,8 @@ Tested on Ubuntu 22.04 LTS.
 
 3. Download the project & change directory to the project folder.
     ```bash
-    git clone https://github.com/rafaelmoczalla/TBD.git
-    cd TBD
+    git clone https://github.com/rafaelmoczalla/environment.git
+    cd environment
     ```
 
 ## Usage
