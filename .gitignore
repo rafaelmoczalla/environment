@@ -1,0 +1,16 @@
+*~
+bin/
+build/
+.gradle
+.gitignore
+.vscode
+*.jar
+
+kafka.sh
+zk-config.sh
+zookeeper.properties
+spark-main.sh
+spark-worker.sh
+docker-compose.yml
+Dockerfile
+Makefile
