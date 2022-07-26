@@ -11,7 +11,19 @@ deleteCluster:
 	docker-compose rm -f
 
 loginMain:
-	docker run -it --rm --name node-main --hostname node-main node:latest /bin/bash
+	docker exec -it node-main /bin/bash
+
+loginWorker:
+	docker exec -it node-worker-1 /bin/bash
+
+startBandwithTestServer:
+	docker exec -it node-main /bin/bash -c "apk add iperf3 && iperf3 -s"
+
+startBandwithTest:
+	docker exec -it node-worker-1 /bin/bash -c "apk add iperf3 && iperf3 -c node-main"
+
+startDebugContainer:
+	docker run -it --rm --name debug-node --hostname debug-node node:latest /bin/bash
 
 initKafkaTopics:
 	for t in \$(streams) ; \\

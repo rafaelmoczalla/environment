@@ -36,6 +36,7 @@ task buildFiles(type: Copy) {
     into "spark"
     expand([
         DOCKER_NETWORK: "$dockerNetwork",
+        NETWORK_RATE_LIMIT: "$networkRateLimit",
 
         SCALA_VERSION: "$scalaVersion",
         SCALA_SUBVERSION: "$scalaSubversion",

@@ -12,6 +12,7 @@ services:
     command: "/bin/bash -c /kafka.sh"
     environment:
       - "MISSION=source-1"
+    privileged: true
   source-2:
     image: node:latest
     container_name: source-2
@@ -24,6 +25,7 @@ services:
     command: "/bin/bash -c /kafka.sh"
     environment:
       - "MISSION=source-2"
+    privileged: true
   source-3:
     image: node:latest
     container_name: source-3
@@ -36,6 +38,7 @@ services:
     command: "/bin/bash -c /kafka.sh"
     environment:
       - "MISSION=source-3"
+    privileged: true
   node-main:
     image: node:latest
     container_name: node-main
@@ -58,6 +61,7 @@ services:
       - "SPARK_WORKER_WEBUI_PORT=${SPARK_WORKER_WEBUI_PORT}"
       - "SPARK_WORKER_LOG=${SPARK_HOME}/logs"
       - "SPARK_MASTER=spark://node-main:${SPARK_MASTER_PORT}"
+    privileged: true
   node-worker-1:
     image: node:latest
     container_name: node-worker-1
@@ -75,6 +79,7 @@ services:
       - "SPARK_WORKER_WEBUI_PORT=${SPARK_WORKER_WEBUI_PORT}"
       - "SPARK_WORKER_LOG=${SPARK_HOME}/logs"
       - "SPARK_MASTER=spark://node-main:${SPARK_MASTER_PORT}"
+    privileged: true
   node-worker-2:
     image: node:latest
     container_name: node-worker-2
@@ -92,4 +97,5 @@ services:
       - "SPARK_WORKER_WEBUI_PORT=${SPARK_WORKER_WEBUI_PORT}"
       - "SPARK_WORKER_LOG=${SPARK_HOME}/logs"
       - "SPARK_MASTER=spark://node-main:${SPARK_MASTER_PORT}"
+    privileged: true
 

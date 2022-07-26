@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/rate-limit-network.sh
+
 export SPARK_HOME=${SPARK_HOME}
 
 . "${SPARK_HOME}/sbin/spark-config.sh"

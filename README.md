@@ -40,7 +40,7 @@ gradle build
 
 When you change the configuration in any of the `gradle.properties` file, or you added a new template file via the `gradle.build` file you need to do a clean rebuild of the project with the following command.
 ```bash
-gradle clean & gradle build
+gradle clean && gradle build
 ```
 Be careful as all files generated from template files are deleted & rebuild.
 
@@ -245,6 +245,6 @@ When you want to add a spark worker just add it in the `docker-compose.yml` file
 ```
 
 ## To-Do List
+- [X] Add utility restricting network bandwidth.
 - [ ] Add utilities for measuring network, CPU & memory utilization.
 - [ ] Add an example for tree like network topologies.
-- [ ] Add utilities restricting network bandwidth.

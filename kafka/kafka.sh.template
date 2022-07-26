@@ -4,6 +4,7 @@ SOURCES="${SOURCE_LIST}"
 
 /wait-for-step.sh
 /execute-step.sh
+/rate-limit-network.sh
 
 # Configure & start zookeeper
 COUNTER=1

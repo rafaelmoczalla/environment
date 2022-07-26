@@ -15,7 +15,7 @@ ENV KAFKA_VERSION=${KAFKA_VERSION}
 ENV SCALA_VERSION=${SCALA_VERSION}
 
 # Install dependencies
-RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss libc6-compat coreutils procps \\
+RUN apk add --no-cache curl bash openjdk8-jre python3 py-pip nss libc6-compat coreutils procps iproute2 \\
       && ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2
 
 # Fix the value of PYTHONHASHSEED
@@ -39,6 +39,7 @@ RUN wget ${KAFKA_BASE_URL}/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSI
 COPY common/wait-for-step.sh /
 COPY common/execute-step.sh /
 COPY common/finish-step.sh /
+COPY common/rate-limit-network.sh /
 
 COPY spark/spark-main.sh /
 COPY spark/spark-worker.sh /
@@ -50,4 +51,6 @@ RUN chmod +x ${KAFKA_HOME}/bin/zk-config.sh
 RUN echo ok
 
 RUN chmod +x *.sh
+
+ENV NETWORK_RATE_LIMIT=${NETWORK_RATE_LIMIT}
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/rate-limit-network.sh
+
 export SPARK_MASTER_HOST=\${SPARK_MASTER_HOST:-`hostname`}
 
 export SPARK_HOME=${SPARK_HOME}
